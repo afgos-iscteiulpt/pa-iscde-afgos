@@ -12,12 +12,13 @@ import pt.iscte.pidesco.projectbrowser.service.ProjectBrowserServices;
 
 public class Activator implements BundleActivator {
 
-	private static BundleContext context;
-	private static JavaEditorServices javaServ;
-	private static ProjectBrowserServices browServ;
-
-	public static BundleContext getContext() {
-		return context;
+	private static Activator instance;
+	
+	private JavaEditorServices javaServ;
+	private ProjectBrowserServices browServ;
+	
+	public static Activator getInstance() {
+		return instance;
 	}
 
 	/*
@@ -28,13 +29,13 @@ public class Activator implements BundleActivator {
 	 */
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
-		Activator.context = bundleContext;
-		ServiceReference<JavaEditorServices> editorServiceReferance = context
+		instance = this;
+		ServiceReference<JavaEditorServices> editorServiceReferance = bundleContext
 				.getServiceReference(JavaEditorServices.class);
-		ServiceReference<ProjectBrowserServices> browserServiceReference = context
+		ServiceReference<ProjectBrowserServices> browserServiceReference = bundleContext
 				.getServiceReference(ProjectBrowserServices.class);
-		javaServ = context.getService(editorServiceReferance);
-		browServ = context.getService(browserServiceReference);
+		javaServ = bundleContext.getService(editorServiceReferance);
+		browServ = bundleContext.getService(browserServiceReference);
 	}
 
 	/*
@@ -45,14 +46,14 @@ public class Activator implements BundleActivator {
 	 */
 	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
-		Activator.context = null;
+		
 	}
 
-	public static JavaEditorServices getJavaServ() {
+	public JavaEditorServices getJavaServ() {
 		return javaServ;
 	}
 
-	public static ProjectBrowserServices getBrowServ() {
+	public ProjectBrowserServices getBrowServ() {
 		return browServ;
 	}
 

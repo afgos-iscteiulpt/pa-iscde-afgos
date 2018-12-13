@@ -26,7 +26,7 @@ public interface TasksAction {
 	 * @param t Task
 	 */
 	default void doubleClick(Task t) {
-		Activator.getJavaServ().selectText(new File(t.getResource()+ "/"+ t.getPath()), t.getOffset(), 0);
+		Activator.getInstance().getJavaServ().selectText(new File(t.getResource()+ "/"+ t.getPath()), t.getOffset(), 0);
 	}
 
 }

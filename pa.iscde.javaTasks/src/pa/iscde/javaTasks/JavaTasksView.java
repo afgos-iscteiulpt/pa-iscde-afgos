@@ -47,7 +47,7 @@ public class JavaTasksView implements PidescoView {
 	 */
 	@Override
 	public void createContents(Composite viewArea, Map<String, Image> imageMap) {
-		Activator.getJavaServ().addListener(new JavaEditorListener() {
+		Activator.getInstance().getJavaServ().addListener(new JavaEditorListener() {
 
 			@Override
 			public void fileOpened(File file) {
@@ -110,7 +110,7 @@ public class JavaTasksView implements PidescoView {
 		TableColumn column = new TableColumn(table, SWT.NONE);
 		column.setText("Offset");
 		column.setResizable(false);
-		readAllFiles(new File(Activator.getBrowServ().getRootPackage().getFile().getPath() + "/src"));
+		readAllFiles(new File(Activator.getInstance().getBrowServ().getRootPackage().getFile().getPath() + "/src"));
 		for (int i = 0; i < titles.length; i++) {
 			table.getColumn(i).pack();
 		}
