@@ -15,19 +15,13 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
 
 import pa.iscde.javaTasks.ext.Task;
 import pt.iscte.pidesco.extensibility.PidescoView;
 import pt.iscte.pidesco.javaeditor.service.JavaEditorListener;
-import pt.iscte.pidesco.javaeditor.service.JavaEditorServices;
-import pt.iscte.pidesco.projectbrowser.service.ProjectBrowserServices;
 
 /**
  * A View witch shows the user what Tasks he still has to do in his code.
@@ -98,8 +92,10 @@ public class JavaTasksView implements PidescoView {
 			@Override
 			public void mouseDoubleClick(MouseEvent e) {
 				TableItem[] selection = table.getSelection();
-				for(TableItem i: selection)
-					extensionsHandler.doubleClick(new Task(i.getText(0), i.getText(1), i.getText(2), i.getText(3), Character.getNumericValue(i.getText(4).charAt(i.getText(4).length()-1)), Integer.parseInt(i.getText(5))));
+				for (TableItem i : selection)
+					extensionsHandler.doubleClick(new Task(i.getText(0), i.getText(1), i.getText(2), i.getText(3),
+							Character.getNumericValue(i.getText(4).charAt(i.getText(4).length() - 1)),
+							Integer.parseInt(i.getText(5))));
 			}
 		});
 		String[] titles = { "Tag", "Description", "Resource", "Path", "Location" };
@@ -136,6 +132,8 @@ public class JavaTasksView implements PidescoView {
 	 * @param file
 	 */
 	public void update(File file) {
+		// Activator.getInstance().getDocGen().openFile(new
+		// File("C:/Users/MrAndrGodinho/git/pa-iscde-rcsao/pa.iscde.docGeneration/src/pa/iscde/docGeneration/Activator.java"));
 		CommentHandler commentHandler = new CommentHandler();
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			String line;
