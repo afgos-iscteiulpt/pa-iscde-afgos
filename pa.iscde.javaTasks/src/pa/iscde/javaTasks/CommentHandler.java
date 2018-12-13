@@ -2,7 +2,6 @@ package pa.iscde.javaTasks;
 
 import java.util.Set;
 
-import pa.iscde.javaTasks.ext.EvaluateContributionsHandler;
 import pa.iscde.javaTasks.ext.Task;
 
 import java.io.File;
@@ -25,7 +24,7 @@ public class CommentHandler {
 	/**
 	 * Process a {@code line} from a {@code file} to check for Tags
 	 * @param line String
-	 * @param file {@link file}
+	 * @param file {@link File}
 	 * @param count Integer line number
 	 * @param offset 
 	 */

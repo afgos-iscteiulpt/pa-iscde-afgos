@@ -23,7 +23,6 @@ import org.eclipse.swt.widgets.TableItem;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
-import pa.iscde.javaTasks.ext.EvaluateContributionsHandler;
 import pa.iscde.javaTasks.ext.Task;
 import pt.iscte.pidesco.extensibility.PidescoView;
 import pt.iscte.pidesco.javaeditor.service.JavaEditorListener;
@@ -98,8 +97,9 @@ public class JavaTasksView implements PidescoView {
 
 			@Override
 			public void mouseDoubleClick(MouseEvent e) {
-				TableItem selection = table.getSelection()[0];
-				extensionsHandler.doubleClick(new Task(selection.getText(0), selection.getText(1), selection.getText(2), selection.getText(3), Character.getNumericValue(selection.getText(4).charAt(selection.getText(4).length()-1)), Integer.parseInt(selection.getText(5))));
+				TableItem[] selection = table.getSelection();
+				for(TableItem i: selection)
+					extensionsHandler.doubleClick(new Task(i.getText(0), i.getText(1), i.getText(2), i.getText(3), Character.getNumericValue(i.getText(4).charAt(i.getText(4).length()-1)), Integer.parseInt(i.getText(5))));
 			}
 		});
 		String[] titles = { "Tag", "Description", "Resource", "Path", "Location" };

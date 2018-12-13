@@ -1,4 +1,4 @@
-package pa.iscde.javaTasks.ext;
+package pa.iscde.javaTasks;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -12,6 +12,9 @@ import org.eclipse.core.runtime.ISafeRunnable;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SafeRunner;
 
+import pa.iscde.javaTasks.ext.Task;
+import pa.iscde.javaTasks.ext.TasksAction;
+
 public class EvaluateContributionsHandler {
 
 	private Set<String> tags = new HashSet<>(Arrays.asList("TODO", "DEBUG", "FIXME"));
@@ -20,12 +23,20 @@ public class EvaluateContributionsHandler {
 
 	private static final String TAGSSERVICE_ID = "pa.iscde.javaTasks.ext";
 
+	/**
+	 * Contructor that checks all extensions for possible TAGS that they want to look for
+	 */
 	public EvaluateContributionsHandler() {
 		for (IConfigurationElement e : config) {
 			tags.add(e.getAttribute("TagName"));
 		}
 	}
 
+	/**
+	 * Get class implementation ox extension and runs their setDescription()
+	 * @param set Set<Task>
+	 * @return Set<Task>
+	 */
 	public Set<Task> processTags(Set<Task> set) {
 		Set<Task> tasks = new HashSet<>();
 		try {
@@ -45,10 +56,10 @@ public class EvaluateContributionsHandler {
 		return tasks;
 	}
 
-	public Set<String> getTags() {
-		return tags;
-	}
-
+	/**
+	 * Looks for a action the extensions want to run when double clicking a task
+	 * @param task Task Selected
+	 */
 	public void doubleClick(Task task) {
 		try {
 			for (IConfigurationElement e : config) {
@@ -60,5 +71,13 @@ public class EvaluateContributionsHandler {
 		} catch (CoreException ex) {
 			System.out.println(ex.getMessage());
 		}
+	}
+	
+	/**
+	 * Getter for Tags
+	 * @return Set of Tags the plugin need to search
+	 */
+	public Set<String> getTags() {
+		return tags;
 	}
 }
