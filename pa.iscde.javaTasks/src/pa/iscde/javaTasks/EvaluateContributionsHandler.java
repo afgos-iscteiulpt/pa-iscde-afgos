@@ -26,7 +26,8 @@ public class EvaluateContributionsHandler {
 	 */
 	public EvaluateContributionsHandler() {
 		for (IConfigurationElement e : config) {
-			tags.add(e.getAttribute("TagName"));
+			if(e.getAttribute("TagName") != null)
+				tags.add(e.getAttribute("TagName"));
 		}
 	}
 

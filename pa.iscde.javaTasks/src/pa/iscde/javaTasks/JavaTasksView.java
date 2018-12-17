@@ -2,6 +2,7 @@ package pa.iscde.javaTasks;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -114,8 +115,8 @@ public class JavaTasksView implements PidescoView {
 		TableColumn column = new TableColumn(table, SWT.NONE);
 		column.setText("Offset");
 		column.setResizable(false);
-		rootName = Activator.getInstance().getBrowServ().getRootPackage().getFile().getPath() + "/src";
-//		readAllFiles(new File(rootName));
+		this.rootName = Activator.getInstance().getBrowServ().getRootPackage().getFile().getPath();
+		readAllFiles(new File(rootName));
 		for (int i = 0; i < titles.length; i++) {
 			table.getColumn(i).pack();
 		}
@@ -127,7 +128,19 @@ public class JavaTasksView implements PidescoView {
 	 * @param file {@link File}
 	 */
 	private void readAllFiles(File file) {
-		for (File f : file.listFiles()) {
+		for (File f : file.listFiles(new FileFilter() {
+			
+			@Override
+			public boolean accept(File pathname) {
+				if (pathname.isDirectory())
+					return true;
+				String name = pathname.getName();
+				int index = name.lastIndexOf(".");
+				if (index == -1)
+					return false;
+				return name.substring(index+1).equals("java"); 
+			}
+		})) {
 			if (f.isFile())
 				update(f);
 			else

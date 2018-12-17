@@ -83,7 +83,7 @@ public class CommentHandler {
 	 */
 	private boolean isInsideQuotes(Collection<Integer> quotesList, int index) {
 		List<Integer> list = (List<Integer>) quotesList;
-		for (int i = 0; i < quotesList.size(); i += 2) {
+		for (int i = 0; i < quotesList.size()-1; i += 2) {
 			IntRange range = new IntRange(list.get(i), list.get(i + 1));
 			if (range.contains(index))
 				return true;
