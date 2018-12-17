@@ -26,7 +26,7 @@ public class Activator implements BundleActivator {
 
 		TasksServices services = new TasksServicesImpl();
 		bundleContext.registerService(TasksServices.class, services, null);
-
+		System.out.println("activator - " + services);
 		ServiceReference<JavaEditorServices> editorServiceReferance = bundleContext
 				.getServiceReference(JavaEditorServices.class);
 		ServiceReference<ProjectBrowserServices> browserServiceReference = bundleContext

@@ -41,14 +41,14 @@ public class EvaluateContributionsHandler {
 		try {
 			for (Task t : set) {
 				String newDescription = t.getDescription();
-			for (IConfigurationElement e : config) {
-				Object o = e.createExecutableExtension("TasksAction");
+				for (IConfigurationElement e : config) {
+					Object o = e.createExecutableExtension("TasksAction");
 					if (o instanceof TasksAction) {
 						newDescription = ((TasksAction) o).setDescription(t);
 					}
 				}
-			tasks.add(new Task(t.getTag(), newDescription, t.getResource(), t.getPath(), t.getLine(),
-					t.getOffset()));
+				tasks.add(
+						new Task(t.getTag(), newDescription, t.getResource(), t.getPath(), t.getLine(), t.getOffset()));
 			}
 		} catch (CoreException ex) {
 			System.out.println(ex.getMessage());
@@ -62,6 +62,8 @@ public class EvaluateContributionsHandler {
 	 * @param task Task Selected
 	 */
 	public void doubleClick(Task task) {
+		if (config.length == 0)
+			new TasksAction() {}.doubleClick(task);
 		try {
 			for (IConfigurationElement e : config) {
 				Object o = e.createExecutableExtension("TasksAction");

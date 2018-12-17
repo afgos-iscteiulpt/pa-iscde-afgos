@@ -1,5 +1,8 @@
 package pa.iscde.javaTasks;
 
+import java.io.File;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import pa.iscde.javaTasks.ext.Task;
@@ -12,13 +15,17 @@ public class TasksServicesImpl implements TasksServices{
 	
 	@Override
 	public Set<Task> getTasks() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<Task> returnSet = new HashSet<Task>();
+		Map<String, Set<Task>> tasksMap = JavaTasksView.getInstance().getTaskList();
+		for(Set<Task> set : tasksMap.values())
+			returnSet.addAll(set);
+		return returnSet;
 	}
 
 	@Override
 	public void update() {
-		System.out.println("hey");
+		String rootName = JavaTasksView.getInstance().getRootName();
+		JavaTasksView.getInstance().update(new File(rootName));
 	}
 
 }

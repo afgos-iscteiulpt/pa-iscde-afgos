@@ -2,6 +2,7 @@ package testExtensivility;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 
 import pa.iscde.javaTasks.ext.TasksServices;
 
@@ -17,11 +18,10 @@ public class Activator implements BundleActivator {
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
 		instance = this;
-//		System.out.println("hey");
-//		ServiceReference<TasksServices> tasksServiceReference = bundleContext
-//				.getServiceReference(TasksServices.class);
-//		TasksServices taskService = bundleContext.getService(tasksServiceReference);
-//		taskService.update();
+		ServiceReference<TasksServices> tasksServiceReference = bundleContext
+				.getServiceReference(TasksServices.class);
+		TasksServices taskService = bundleContext.getService(tasksServiceReference);
+		taskService.update();
 	}
 
 	@Override

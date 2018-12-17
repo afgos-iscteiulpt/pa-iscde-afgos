@@ -29,10 +29,17 @@ import pt.iscte.pidesco.javaeditor.service.JavaEditorListener;
  * @author MrAndrGodinho
  */
 public class JavaTasksView implements PidescoView {
+	
+	private static JavaTasksView instance;
 
 	private EvaluateContributionsHandler extensionsHandler = new EvaluateContributionsHandler();
 	private Map<String, Set<Task>> taskList = new HashMap<String, Set<Task>>();
+	private String rootName;
 	private Table table;
+	
+	public static JavaTasksView getInstance() {
+		return instance;
+	}
 
 	/**
 	 * Creates a layout with a table, which columns are "Tag", "Description",
@@ -41,6 +48,7 @@ public class JavaTasksView implements PidescoView {
 	 */
 	@Override
 	public void createContents(Composite viewArea, Map<String, Image> imageMap) {
+		instance = this;
 		Activator.getInstance().getJavaServ().addListener(new JavaEditorListener() {
 
 			@Override
@@ -106,7 +114,8 @@ public class JavaTasksView implements PidescoView {
 		TableColumn column = new TableColumn(table, SWT.NONE);
 		column.setText("Offset");
 		column.setResizable(false);
-		readAllFiles(new File(Activator.getInstance().getBrowServ().getRootPackage().getFile().getPath() + "/src"));
+		rootName = Activator.getInstance().getBrowServ().getRootPackage().getFile().getPath() + "/src";
+//		readAllFiles(new File(rootName));
 		for (int i = 0; i < titles.length; i++) {
 			table.getColumn(i).pack();
 		}
@@ -132,8 +141,6 @@ public class JavaTasksView implements PidescoView {
 	 * @param file
 	 */
 	public void update(File file) {
-		// Activator.getInstance().getDocGen().openFile(new
-		// File("C:/Users/MrAndrGodinho/git/pa-iscde-rcsao/pa.iscde.docGeneration/src/pa/iscde/docGeneration/Activator.java"));
 		CommentHandler commentHandler = new CommentHandler();
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			String line;
@@ -142,7 +149,7 @@ public class JavaTasksView implements PidescoView {
 			while ((line = br.readLine()) != null) {
 				count++;
 				commentHandler.processString(extensionsHandler.getTags(), line, file, count, offset);
-				offset += line.length() + 2;
+				offset += line.length() + 1;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -173,5 +180,13 @@ public class JavaTasksView implements PidescoView {
 			table.getColumn(i).pack();
 		}
 
+	}
+
+	public Map<String, Set<Task>> getTaskList() {
+		return taskList;
+	}
+
+	public String getRootName() {
+		return rootName;
 	}
 }
