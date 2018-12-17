@@ -101,7 +101,7 @@ public class CommentHandler {
 		for (String s : tags) {
 			int index = line.indexOf(s.toString());
 			if (index > -1)
-				this.taskSet.add(new Task(s, line.substring(index + s.toString().length()), file.getParentFile().getPath(), file.getName(), count, offset));
+				this.taskSet.add(new Task(s, line.substring(index + s.toString().length()), file.getName(), file.getParentFile().getPath(), count, offset));
 		}
 	}
 
