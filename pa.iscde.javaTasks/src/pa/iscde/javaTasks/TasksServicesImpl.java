@@ -24,8 +24,7 @@ public class TasksServicesImpl implements TasksServices{
 
 	@Override
 	public void update() {
-		String rootName = JavaTasksView.getInstance().getRootName();
-		JavaTasksView.getInstance().update(new File(rootName));
+		JavaTasksView.getInstance().update();
 	}
 
 }

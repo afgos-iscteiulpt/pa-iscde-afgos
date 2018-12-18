@@ -5,6 +5,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
 import pa.iscde.javaTasks.ext.TasksServices;
+import pa.iscde.search.services.SearchService;
 import pt.iscte.pidesco.javaeditor.service.JavaEditorServices;
 import pt.iscte.pidesco.projectbrowser.service.ProjectBrowserServices;
 
@@ -14,7 +15,7 @@ public class Activator implements BundleActivator {
 
 	private JavaEditorServices javaServ;
 	private ProjectBrowserServices browServ;
-//	private DocGenServices docGen;
+	private SearchService searchServ;
 
 	public static Activator getInstance() {
 		return instance;
@@ -30,11 +31,11 @@ public class Activator implements BundleActivator {
 				.getServiceReference(JavaEditorServices.class);
 		ServiceReference<ProjectBrowserServices> browserServiceReference = bundleContext
 				.getServiceReference(ProjectBrowserServices.class);
+		ServiceReference<SearchService> searchServiceReference = bundleContext.getServiceReference(SearchService.class);
 		javaServ = bundleContext.getService(editorServiceReferance);
 		browServ = bundleContext.getService(browserServiceReference);
-//		ServiceReference<DocGenServices> docGenServiceReference = bundleContext
-//				.getServiceReference(DocGenServices.class);
-//		docGen = bundleContext.getService(docGenServiceReference);
+		searchServ = bundleContext.getService(searchServiceReference);
+
 	}
 
 	@Override
@@ -49,8 +50,8 @@ public class Activator implements BundleActivator {
 		return browServ;
 	}
 
-//	public DocGenServices getDocGen() {
-//		return docGen;
-//	}
+	public SearchService getSearchServ() {
+		return searchServ;
+	}
 
 }

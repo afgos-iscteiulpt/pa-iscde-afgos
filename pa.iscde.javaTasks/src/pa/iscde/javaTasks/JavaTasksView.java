@@ -6,12 +6,14 @@ import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -21,6 +23,8 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 import pa.iscde.javaTasks.ext.Task;
+import pa.iscde.search.model.MatchResult;
+import pa.iscde.search.services.SearchListener;
 import pt.iscte.pidesco.extensibility.PidescoView;
 import pt.iscte.pidesco.javaeditor.service.JavaEditorListener;
 
@@ -30,14 +34,14 @@ import pt.iscte.pidesco.javaeditor.service.JavaEditorListener;
  * @author MrAndrGodinho
  */
 public class JavaTasksView implements PidescoView {
-	
+
 	private static JavaTasksView instance;
 
 	private EvaluateContributionsHandler extensionsHandler = new EvaluateContributionsHandler();
 	private Map<String, Set<Task>> taskList = new HashMap<String, Set<Task>>();
 	private String rootName;
 	private Table table;
-	
+
 	public static JavaTasksView getInstance() {
 		return instance;
 	}
@@ -54,7 +58,7 @@ public class JavaTasksView implements PidescoView {
 
 			@Override
 			public void fileOpened(File file) {
-				update(file);
+
 			}
 
 			@Override
@@ -70,6 +74,14 @@ public class JavaTasksView implements PidescoView {
 			@Override
 			public void selectionChanged(File file, String text, int offset, int length) {
 
+			}
+		});
+
+		Activator.getInstance().getSearchServ().addListener(new SearchListener() {
+
+			@Override
+			public void searchComplete(String searchInput, List<MatchResult> resultList) {
+				highlightTable(taskList, searchInput);
 			}
 		});
 
@@ -129,7 +141,7 @@ public class JavaTasksView implements PidescoView {
 	 */
 	private void readAllFiles(File file) {
 		for (File f : file.listFiles(new FileFilter() {
-			
+
 			@Override
 			public boolean accept(File pathname) {
 				if (pathname.isDirectory())
@@ -138,7 +150,7 @@ public class JavaTasksView implements PidescoView {
 				int index = name.lastIndexOf(".");
 				if (index == -1)
 					return false;
-				return name.substring(index+1).equals("java"); 
+				return name.substring(index + 1).equals("java");
 			}
 		})) {
 			if (f.isFile())
@@ -192,6 +204,25 @@ public class JavaTasksView implements PidescoView {
 		for (int i = 0; i < 5; i++) {
 			table.getColumn(i).pack();
 		}
+	}
+
+	private void highlightTable(Map<String, Set<Task>> map, String search) {
+		table.removeAll();
+		for (Set<Task> s : map.values())
+			for (Task t : s) {
+				TableItem item = new TableItem(table, SWT.NONE);
+				item.setText(0, t.getTag().toString());
+				item.setText(1, t.getDescription());
+				item.setText(2, t.getResource());
+				item.setText(3, t.getPath());
+				item.setText(4, "line " + t.getLine());
+				item.setText(5, Integer.toString(t.getOffset()));
+				if (t.getTag().toString().equals(search))
+					item.setBackground(new Color(item.getDisplay(), 255, 255, 230));
+			}
+		for (int i = 0; i < 5; i++) {
+			table.getColumn(i).pack();
+		}
 
 	}
 
@@ -201,5 +232,10 @@ public class JavaTasksView implements PidescoView {
 
 	public String getRootName() {
 		return rootName;
+	}
+
+	public void update() {
+		readAllFiles(new File(rootName));
+
 	}
 }
