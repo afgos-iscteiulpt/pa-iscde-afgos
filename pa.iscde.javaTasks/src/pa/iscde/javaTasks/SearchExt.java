@@ -8,17 +8,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.widgets.TableItem;
 
 import pa.iscde.javaTasks.ext.Task;
 import pa.iscde.search.extensibility.SearchProvider;
 import pa.iscde.search.model.MatchResult;
-import pa.iscde.search.services.SearchListener;
 
 public class SearchExt implements SearchProvider {
 	
