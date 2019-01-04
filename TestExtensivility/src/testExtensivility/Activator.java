@@ -4,6 +4,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
+import pa.iscde.javaTasks.ext.Task;
 import pa.iscde.javaTasks.ext.TasksServices;
 
 public class Activator implements BundleActivator {
@@ -20,8 +21,7 @@ public class Activator implements BundleActivator {
 		instance = this;
 		ServiceReference<TasksServices> tasksServiceReference = bundleContext
 				.getServiceReference(TasksServices.class);
-		TasksServices taskService = bundleContext.getService(tasksServiceReference);
-		taskService.update();
+		taskService = bundleContext.getService(tasksServiceReference);
 	}
 
 	@Override

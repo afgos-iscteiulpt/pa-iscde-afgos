@@ -8,5 +8,13 @@
             TasksAction="testExtensivility.TasksActions">
       </client>
    </extension>
+   <extension
+         id="id1"
+         name="name"
+         point="pt.iscte.pidesco.view">
+      <view
+            class="testExtensivility.RandomView">
+      </view>
+   </extension>
 
 </plugin>

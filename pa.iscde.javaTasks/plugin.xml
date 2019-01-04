@@ -11,5 +11,12 @@
             icon="smiley.png">
       </view>
    </extension>
+   <extension
+         point="pa.iscde.search.search">
+      <search
+            class="pa.iscde.javaTasks.SearchExt"
+            name="Task">
+      </search>
+   </extension>
 
 </plugin>

@@ -7,7 +7,7 @@ public class TasksActions implements TasksAction {
 
 	@Override
 	public String setDescription(Task t) {
-		return "I'm dying" + t.getDescription();
+		return "Hello World! " + t.getDescription();
 	}
 
 	@Override
