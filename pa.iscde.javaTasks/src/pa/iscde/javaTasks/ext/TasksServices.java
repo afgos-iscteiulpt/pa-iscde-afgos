@@ -2,6 +2,10 @@ package pa.iscde.javaTasks.ext;
 
 import java.util.Set;
 
+/**
+ * Services offered by JavaTasks component
+ * @author MrAndrGodinho
+ */
 public interface TasksServices {
 	
 	/**

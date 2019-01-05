@@ -226,14 +226,25 @@ public class JavaTasksView implements PidescoView {
 
 	}
 
+	/**
+	 * Getter for TaskList
+	 * @return
+	 */
 	public Map<String, Set<Task>> getTaskList() {
 		return taskList;
 	}
 
+	/**
+	 * Getter for rootName
+	 * @return
+	 */
 	public String getRootName() {
 		return rootName;
 	}
 
+	/**
+	 * Update the table
+	 */
 	public void update() {
 		readAllFiles(new File(rootName));
 

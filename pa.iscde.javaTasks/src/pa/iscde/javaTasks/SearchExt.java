@@ -14,11 +14,19 @@ import pa.iscde.javaTasks.ext.Task;
 import pa.iscde.search.extensibility.SearchProvider;
 import pa.iscde.search.model.MatchResult;
 
+/**
+ * Class connected to pa.iscde.search extension point
+ * @author MrAndrGodinho
+ *
+ */
 public class SearchExt implements SearchProvider {
 	
 	private CommentHandler commentHandler;
 	private Set<String> tagsSet;
 
+	/**
+	 * Returns the search result expected when searching for "Task"
+	 */
 	@Override
 	public List<MatchResult> searchFor(String type, String input) {
 		commentHandler = new CommentHandler();
@@ -41,6 +49,10 @@ public class SearchExt implements SearchProvider {
 		return list;
 	}
 	
+	/**
+	 * Reads all files when looking for tags
+	 * @param file directory or file
+	 */
 	private void readAllFiles(File file) {
 		for (File f : file.listFiles(new FileFilter() {
 
@@ -62,6 +74,10 @@ public class SearchExt implements SearchProvider {
 		}
 	}
 	
+	/**
+	 * Read specific file and look for Tag
+	 * @param file
+	 */
 	private void readFile(File file) {
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			String line;

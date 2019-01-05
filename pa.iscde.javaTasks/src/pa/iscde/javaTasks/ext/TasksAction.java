@@ -4,6 +4,11 @@ import java.io.File;
 
 import pa.iscde.javaTasks.Activator;
 
+/**
+ * Class used by the extension in javaTasks component
+ * @author MrAndrGodinho
+ *
+ */
 public interface TasksAction {
 
 	/**

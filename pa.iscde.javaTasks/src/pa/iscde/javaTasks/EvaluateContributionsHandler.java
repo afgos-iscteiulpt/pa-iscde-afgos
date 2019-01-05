@@ -12,6 +12,11 @@ import org.eclipse.core.runtime.Platform;
 import pa.iscde.javaTasks.ext.Task;
 import pa.iscde.javaTasks.ext.TasksAction;
 
+/**
+ * Extensions handler
+ * @author MrAndrGodinho
+ *
+ */
 public class EvaluateContributionsHandler {
 
 	private Set<String> tags = new HashSet<>(Arrays.asList("TODO", "DEBUG", "FIXME"));
@@ -21,7 +26,7 @@ public class EvaluateContributionsHandler {
 	private static final String TAGSSERVICE_ID = "pa.iscde.javaTasks.ext";
 
 	/**
-	 * Contructor that checks all extensions for possible TAGS that they want to
+	 * Constructor that checks all extensions for possible TAGS that they want to
 	 * look for
 	 */
 	public EvaluateContributionsHandler() {

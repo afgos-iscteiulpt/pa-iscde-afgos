@@ -9,10 +9,16 @@ import pa.iscde.search.services.SearchService;
 import pt.iscte.pidesco.javaeditor.service.JavaEditorServices;
 import pt.iscte.pidesco.projectbrowser.service.ProjectBrowserServices;
 
+
+/**
+ * JavaTasks Activator
+ * 
+ * @author MrAndrGodinho
+ *
+ */
 public class Activator implements BundleActivator {
 
 	private static Activator instance;
-
 	private JavaEditorServices javaServ;
 	private ProjectBrowserServices browServ;
 	private SearchService searchServ;
@@ -42,14 +48,26 @@ public class Activator implements BundleActivator {
 	public void stop(BundleContext bundleContext) throws Exception {
 	}
 
+	/**
+	 * Getter for JavaEditor Service
+	 * @return JavaEditorServices instance
+	 */
 	public JavaEditorServices getJavaServ() {
 		return javaServ;
 	}
 
+	/**
+	 * Getter for ProjectBrowser Service
+	 * @return ProjectBroswserServices instance
+	 */
 	public ProjectBrowserServices getBrowServ() {
 		return browServ;
 	}
 
+	/**
+	 * Getter for SearchS Service
+	 * @return SearchService instance
+	 */
 	public SearchService getSearchServ() {
 		return searchServ;
 	}
