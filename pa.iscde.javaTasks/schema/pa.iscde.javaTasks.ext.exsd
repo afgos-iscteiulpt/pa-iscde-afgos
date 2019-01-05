@@ -6,7 +6,7 @@
          <meta.schema plugin="pa.iscde.javaTasks" id="pa.iscde.javaTasks.ext" name="JavaTasks"/>
       </appinfo>
       <documentation>
-         [Enter description of this extension point.]
+         This extension point is able to add Tags to be searched by the component, and change both what is shows in a task&apos;s description, and what happens a task is double clicked
       </documentation>
    </annotation>
 
@@ -92,7 +92,9 @@
          <meta.section type="apiinfo"/>
       </appinfo>
       <documentation>
-         [Enter API information here.]
+         TagName - Additional for to component to search
+setDescription(Task) - Changes what is shown in the description
+doubleClick(Task) - Changes the components behaviour when double clicking a task(s)
       </documentation>
    </annotation>
 

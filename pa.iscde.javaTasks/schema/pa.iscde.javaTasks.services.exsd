@@ -6,7 +6,7 @@
          <meta.schema plugin="pa.iscde.javaTasks" id="pa.iscde.javaTasks.services" name="TagsService"/>
       </appinfo>
       <documentation>
-         [Enter description of this extension point.]
+         Service for JavaTasks, where one can get All Tasks found and update the table.
       </documentation>
    </annotation>
 
@@ -92,7 +92,8 @@
          <meta.section type="apiinfo"/>
       </appinfo>
       <documentation>
-         [Enter API information here.]
+         getTasks() - Returns a Set&lt;Tasks&gt; currently in the table.
+update() - updates the table.
       </documentation>
    </annotation>
 
