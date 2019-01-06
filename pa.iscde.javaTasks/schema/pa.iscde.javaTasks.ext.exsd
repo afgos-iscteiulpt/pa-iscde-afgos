@@ -52,14 +52,14 @@
          <attribute name="TagName" type="string">
             <annotation>
                <documentation>
-                  
+                  An additiontal Tag for the component to look for. Leave it blank to not add a Tag.
                </documentation>
             </annotation>
          </attribute>
          <attribute name="TasksAction" type="string">
             <annotation>
                <documentation>
-                  
+                  Class that changes components behaviour
                </documentation>
                <appinfo>
                   <meta.attribute kind="java" basedOn=":pa.iscde.javaTasks.ext.TasksAction"/>

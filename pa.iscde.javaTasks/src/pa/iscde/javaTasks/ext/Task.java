@@ -79,6 +79,10 @@ public class Task {
 		return line;
 	}
 
+	/**
+	 * Getter for TaskOffset
+	 * @return
+	 */
 	public int getOffset() {
 		return offset;
 	}

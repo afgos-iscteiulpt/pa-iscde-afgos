@@ -2,7 +2,7 @@ package pa.iscde.javaTasks;
 
 /**
  * Resource to help process Ranges since i found out something as simple
- * as this is not a standart library in Java.
+ * as this is not a standard library in Java.
  * @author MrAndrGodinho
  *
  */
